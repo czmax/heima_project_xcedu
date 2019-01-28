@@ -1,0 +1,9 @@
+server:
+  port: 31001
+spring:
+  application:
+    name: xc_service_manage_cms
+  data:
+    mongodb:
+      uri: mongodb://root:123@192.168.1.193:27017
+      database: xc_cms
