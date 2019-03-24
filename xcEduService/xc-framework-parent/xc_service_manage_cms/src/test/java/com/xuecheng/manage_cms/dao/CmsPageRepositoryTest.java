@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Chen
@@ -25,17 +26,25 @@ public class CmsPageRepositoryTest {
 
     @Test
     public void testFindAll() {
-
         List<CmsPage> all = cmsPageRepository.findAll();
         System.out.println("all的值是：---" + all.size() + "，当前方法=CmsPageRepositoryTest.testFindAll()");
     }
 
     @Test
     public void testFindPage() {
-
         Pageable pageable = PageRequest.of(0, 10);
         Page<CmsPage> all = cmsPageRepository.findAll(pageable);
         System.out.println("all的值是：---" + all + "，当前方法=CmsPageRepositoryTest.testFindPage()");
+    }
 
+    @Test
+    public void testUpdate() {
+        Optional<CmsPage> optional = cmsPageRepository.findById("5a754adf6abb500ad05688d9");
+        if (optional.isPresent()) {
+            CmsPage cmsPage = optional.get();
+            cmsPage.setPageAliase("test01");
+            CmsPage save = cmsPageRepository.save(cmsPage);
+            System.out.println("save的值是：---" + save + "，当前方法=CmsPageRepositoryTest.testUpdate()");
+        }
     }
 }
